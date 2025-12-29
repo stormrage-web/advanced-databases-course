@@ -1,0 +1,61 @@
+﻿{
+    "status":  "success",
+    "data":  {
+                 "activeTargets":  [
+                                       {
+                                           "discoveredLabels":  {
+                                                                    "__address__":  "clickhouse:9363",
+                                                                    "__metrics_path__":  "/metrics",
+                                                                    "__scheme__":  "http",
+                                                                    "__scrape_interval__":  "15s",
+                                                                    "__scrape_timeout__":  "10s",
+                                                                    "instance":  "clickhouse-dev",
+                                                                    "job":  "clickhouse"
+                                                                },
+                                           "labels":  {
+                                                          "instance":  "clickhouse-dev",
+                                                          "job":  "clickhouse"
+                                                      },
+                                           "scrapePool":  "clickhouse",
+                                           "scrapeUrl":  "http://clickhouse:9363/metrics",
+                                           "globalUrl":  "http://clickhouse:9363/metrics",
+                                           "lastError":  "",
+                                           "lastScrape":  "2025-12-29T13:41:46.712324493Z",
+                                           "lastScrapeDuration":  0.013936316,
+                                           "health":  "up",
+                                           "scrapeInterval":  "15s",
+                                           "scrapeTimeout":  "10s"
+                                       },
+                                       {
+                                           "discoveredLabels":  {
+                                                                    "__address__":  "prometheus:9090",
+                                                                    "__metrics_path__":  "/metrics",
+                                                                    "__scheme__":  "http",
+                                                                    "__scrape_interval__":  "15s",
+                                                                    "__scrape_timeout__":  "10s",
+                                                                    "job":  "prometheus"
+                                                                },
+                                           "labels":  {
+                                                          "instance":  "prometheus:9090",
+                                                          "job":  "prometheus"
+                                                      },
+                                           "scrapePool":  "prometheus",
+                                           "scrapeUrl":  "http://prometheus:9090/metrics",
+                                           "globalUrl":  "http://prometheus:9090/metrics",
+                                           "lastError":  "",
+                                           "lastScrape":  "2025-12-29T13:41:58.118481331Z",
+                                           "lastScrapeDuration":  0.003630101,
+                                           "health":  "up",
+                                           "scrapeInterval":  "15s",
+                                           "scrapeTimeout":  "10s"
+                                       }
+                                   ],
+                 "droppedTargets":  [
+
+                                    ],
+                 "droppedTargetCounts":  {
+                                             "clickhouse":  0,
+                                             "prometheus":  0
+                                         }
+             }
+}

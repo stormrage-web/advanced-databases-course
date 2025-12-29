@@ -1,0 +1,13 @@
+apiVersion: 1
+
+providers:
+  - name: "Ozon Analytics"
+    orgId: 1
+    folder: "Ozon"
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards
+
+

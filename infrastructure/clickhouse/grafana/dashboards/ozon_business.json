@@ -1,0 +1,84 @@
+{
+  "uid": "ozon-business",
+  "title": "Ozon: Бизнес-метрики",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "tags": ["ozon", "clickhouse"],
+  "panels": [
+    {
+      "type": "table",
+      "title": "Топ-20 категорий по количеству товаров (MV)",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 10 },
+      "datasource": { "type": "grafana-clickhouse-datasource", "uid": "clickhouse" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "sql",
+          "rawQuery": true,
+          "rawSql": "SELECT category_id, countMerge(offers_cnt_state) AS offers_cnt FROM ozon_analytics.catalog_by_category_agg GROUP BY category_id ORDER BY offers_cnt DESC LIMIT 20"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Топ-30 брендов по количеству товаров (MV)",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 10 },
+      "datasource": { "type": "grafana-clickhouse-datasource", "uid": "clickhouse" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "sql",
+          "rawQuery": true,
+          "rawSql": "SELECT vendor, countMerge(offers_cnt_state) AS offers_cnt FROM ozon_analytics.catalog_by_brand_agg GROUP BY vendor ORDER BY offers_cnt DESC LIMIT 30"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Покрытие каталога событиями (offers_with_events / total)",
+      "gridPos": { "x": 0, "y": 10, "w": 8, "h": 6 },
+      "datasource": { "type": "grafana-clickhouse-datasource", "uid": "clickhouse" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "sql",
+          "rawQuery": true,
+          "rawSql": "SELECT round(countIf(coalesce(ev.events_cnt, 0) > 0) / count() * 100, 2) AS coverage_percent FROM ozon_analytics.ecom_offers AS o LEFT JOIN (SELECT offer_id, countMerge(events_cnt_state) AS events_cnt FROM ozon_analytics.events_by_offer_agg GROUP BY offer_id) AS ev ON ev.offer_id = o.offer_id"
+        }
+      ],
+      "options": { "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false } }
+    },
+    {
+      "type": "piechart",
+      "title": "Активность по устройствам (MV)",
+      "gridPos": { "x": 8, "y": 10, "w": 8, "h": 6 },
+      "datasource": { "type": "grafana-clickhouse-datasource", "uid": "clickhouse" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "sql",
+          "rawQuery": true,
+          "rawSql": "SELECT sumIf(events_cnt, device = 'Mobile') AS Mobile, sumIf(events_cnt, device = 'Desktop') AS Desktop, sumIf(events_cnt, device = 'Tablet') AS Tablet FROM (SELECT toString(DeviceTypeName) AS device, countMerge(events_cnt_state) AS events_cnt FROM ozon_analytics.events_by_device_agg GROUP BY DeviceTypeName)"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "title": "Товары без событий (пример 50 строк)",
+      "gridPos": { "x": 16, "y": 10, "w": 8, "h": 6 },
+      "datasource": { "type": "grafana-clickhouse-datasource", "uid": "clickhouse" },
+      "targets": [
+        {
+          "refId": "A",
+          "queryType": "sql",
+          "rawQuery": true,
+          "rawSql": "SELECT o.offer_id, o.category_id, o.vendor, o.price FROM ozon_analytics.ecom_offers AS o LEFT JOIN (SELECT offer_id, countMerge(events_cnt_state) AS events_cnt FROM ozon_analytics.events_by_offer_agg GROUP BY offer_id) AS ev ON ev.offer_id = o.offer_id WHERE coalesce(ev.events_cnt, 0) = 0 ORDER BY o.offer_id LIMIT 50"
+        }
+      ]
+    }
+  ]
+}
+
+

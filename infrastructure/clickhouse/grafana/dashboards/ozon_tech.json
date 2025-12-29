@@ -1,0 +1,65 @@
+{
+  "uid": "ozon-tech",
+  "title": "Ozon: Технические метрики ClickHouse",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "tags": ["ozon", "prometheus", "clickhouse"],
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "QPS (rate(Query))",
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "rate(ClickHouseProfileEvents_Query[1m])",
+          "legendFormat": "query/s"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Select QPS (rate(SelectQuery))",
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "rate(ClickHouseProfileEvents_SelectQuery[1m])",
+          "legendFormat": "select/s"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory resident (bytes)",
+      "gridPos": { "x": 0, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ClickHouseAsyncMetrics_MemoryResident",
+          "legendFormat": "resident"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Running queries",
+      "gridPos": { "x": 12, "y": 8, "w": 12, "h": 8 },
+      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "ClickHouseMetrics_Query",
+          "legendFormat": "queries"
+        }
+      ]
+    }
+  ]
+}
+
+
