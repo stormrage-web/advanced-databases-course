@@ -1,0 +1,30 @@
+﻿# HELP ClickHouseProfileEvents_Query Number of queries to be interpreted and potentially executed. Does not include queries that failed to parse or were rejected due to AST size limits, quota limits or limits on the number of simultaneously running queries. May include internal queries initiated by ClickHouse itself. Does not count subqueries.
+# TYPE ClickHouseProfileEvents_Query counter
+ClickHouseProfileEvents_Query 18077
+# HELP ClickHouseProfileEvents_SelectQuery Same as Query, but only for SELECT queries.
+# TYPE ClickHouseProfileEvents_SelectQuery counter
+ClickHouseProfileEvents_SelectQuery 18030
+# HELP ClickHouseProfileEvents_InsertQuery Same as Query, but only for INSERT queries.
+# TYPE ClickHouseProfileEvents_InsertQuery counter
+ClickHouseProfileEvents_InsertQuery 2
+# HELP ClickHouseProfileEvents_InitialQuery Same as Query, but only counts initial queries (see is_initial_query).
+# TYPE ClickHouseProfileEvents_InitialQuery counter
+ClickHouseProfileEvents_InitialQuery 18077
+# HELP ClickHouseProfileEvents_QueriesWithSubqueries Count queries with all subqueries
+# TYPE ClickHouseProfileEvents_QueriesWithSubqueries counter
+ClickHouseProfileEvents_QueriesWithSubqueries 18126
+# HELP ClickHouseProfileEvents_SelectQueriesWithSubqueries Count SELECT queries with all subqueries
+# TYPE ClickHouseProfileEvents_SelectQueriesWithSubqueries counter
+ClickHouseProfileEvents_SelectQueriesWithSubqueries 18081
+# HELP ClickHouseProfileEvents_InsertQueriesWithSubqueries Count INSERT queries with all subqueries
+# TYPE ClickHouseProfileEvents_InsertQueriesWithSubqueries counter
+ClickHouseProfileEvents_InsertQueriesWithSubqueries 0
+# HELP ClickHouseProfileEvents_SelectQueriesWithPrimaryKeyUsage Count SELECT queries which use the primary key to evaluate the WHERE condition
+# TYPE ClickHouseProfileEvents_SelectQueriesWithPrimaryKeyUsage counter
+ClickHouseProfileEvents_SelectQueriesWithPrimaryKeyUsage 0
+# HELP ClickHouseProfileEvents_AsyncInsertQuery Same as InsertQuery, but only for asynchronous INSERT queries.
+# TYPE ClickHouseProfileEvents_AsyncInsertQuery counter
+ClickHouseProfileEvents_AsyncInsertQuery 0
+# HELP ClickHouseProfileEvents_AsyncInsertBytes Data size in bytes of asynchronous INSERT queries.
+# TYPE ClickHouseProfileEvents_AsyncInsertBytes counter
+ClickHouseProfileEvents_AsyncInsertBytes 0

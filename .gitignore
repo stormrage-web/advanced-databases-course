@@ -1,1 +1,11 @@
+# Generated datasets
+data/offers_clean.csv
+data/raw_events.csv
+data/10ozon.csv
+
+# ClickHouse / Prometheus / Grafana local data (if ever bind-mounted)
+**/clickhouse_data/
+**/prometheus_data/
+**/grafana_data/
+
 .idea
